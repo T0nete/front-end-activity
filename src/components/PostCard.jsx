@@ -13,7 +13,7 @@ import { CommentIcon, HeartIcon } from '../assets/IconsSVG'
 const PostCard = props => {
   const { date, likes, author, description, image, comments } = props
   return (
-      <Card className=''>
+      <Card className='shadow-sm'>
         <CardImg
           alt="Post image"
           src={image}

@@ -13,7 +13,7 @@ import { BeamIcon, UserProfileIcon } from '../assets/IconsSVG'
 const HeaderNavbar = props => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const toggleNavbar = () => setIsOpen(!isOpen)
+  const toggleNavbar = () => {} // setIsOpen(!isOpen)
 
   return (
     <Navbar color="faded" light expand="md" className='bg-light  justify-content-between align-items-center w-100 border-bottom shadow-sm'>
