@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   Collapse,
   Navbar,
@@ -11,10 +11,11 @@ import {
 import { BeamIcon, UserProfileIcon } from '../assets/IconsSVG'
 
 const HeaderNavbar = props => {
-  const [isOpen, setIsOpen] = useState(false)
+//   const [isOpen, setIsOpen] = useState(false)
 
-  const toggleNavbar = () => {} // setIsOpen(!isOpen)
+  //   const toggleNavbar = () => {} // setIsOpen(!isOpen)
 
+  const isOpen = true
   return (
     <Navbar color="faded" light expand="md" className='bg-light  justify-content-between align-items-center w-100 border-bottom shadow-sm'>
 
@@ -22,7 +23,7 @@ const HeaderNavbar = props => {
             <BeamIcon />
             <p className='mb-0'>three pics</p>
         </NavbarBrand>
-        <NavbarToggler onClick={toggleNavbar} className="me-2 border-0">
+        <NavbarToggler onClick={() => {}} className="me-2 border-0">
             <UserProfileIcon />
         </NavbarToggler>
         <Collapse isOpen={isOpen} navbar className='w-100 justify-content-end'>
