@@ -8,28 +8,28 @@ import Profile from './Profile'
 
 const MainContentLayout = props => {
   const { section } = props
-  const [searchValue, setSearchValue] = useState('')
   const [isLoaded, setIsLoaded] = useState(false)
   const [posts, setPosts] = useState(mockPost)
 
   const handleSearchValue = useMemo(
     () =>
       debounce((event) => {
-        setSearchValue(event.target.value)
-      }, 300),
+        const searchValue = event.target.value
+        const filteredPost = mockPost.filter((post) => {
+          return post.description.toLowerCase().includes(searchValue.toLowerCase())
+        })
+        setPosts(filteredPost)
+      }, 500),
     []
   )
 
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true)
-      const filteredPost = mockPost.filter((post) => {
-        return post.description.toLowerCase().includes(searchValue.toLowerCase())
-      })
-      setPosts(filteredPost)
+      setPosts(mockPost)
     }, 3000)
     setIsLoaded(false)
-  }, [searchValue, section])
+  }, [section])
 
   return (
     <div className="container">
@@ -38,18 +38,22 @@ const MainContentLayout = props => {
           {
             section === Views.profile.name
               ? <Profile avatar={mockUser.avatar} username={mockUser.username} bio={mockUser.bio}/>
-              : !isLoaded
-                  ? <div className="text-center">Loading...</div>
-                  : (
-                    <div>
-                      <div className="row justify-content-center">
-                          <div className="col-md-6">
-                              <SearchBar onSearch={handleSearchValue}/>
-                          </div>
-                      </div>
-                      <PostList posts={posts} setPosts={setPosts}/>
+              : <div>
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <SearchBar onSearch={handleSearchValue}/>
                     </div>
-                    )
+                    </div>
+                    {
+                      !isLoaded
+                        ? <div className="text-center">Loading...</div>
+                        : (
+                            <div className='p-2'>
+                              <PostList posts={posts} setPosts={setPosts}/>
+                            </div>
+                          )
+                    }
+              </div>
           }
         </div>
     </div>
