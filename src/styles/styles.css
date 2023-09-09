@@ -1,0 +1,14 @@
+@media (min-width: 576px) {
+    .custom-width-sm {
+      width: 80% !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .custom-width-md {
+        width: 40% !important;
+    }
+}
+  
+
+  

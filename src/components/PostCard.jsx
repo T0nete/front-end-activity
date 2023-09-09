@@ -9,14 +9,19 @@ import {
   CardText
 } from 'reactstrap'
 import { CommentIcon, HeartIcon } from '../assets/IconsSVG'
+import axiosInstance from '../service/axiosService'
 
 const PostCard = props => {
-  const { date, author, likes, description, image, comments, handleOnLike } = props
+  const { id, date, author, likes, description, image, comments } = props
   const [numberOfLikes, setNumberOfLikes] = useState(likes)
 
-  const handleLike = () => {
-    handleOnLike()
-    setNumberOfLikes(likes + 1)
+  const handleLike = async () => {
+    try {
+      await axiosInstance.post(`/posts/${id}/like`)
+      setNumberOfLikes(likes + 1)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -28,7 +33,7 @@ const PostCard = props => {
         />
         <CardBody>
           <CardText>
-            <small className="text-muted">{date}min ago</small>
+            <small className="text-muted">{date}</small>
           </CardText>
           <CardTitle><b>@{author}</b></CardTitle>
           <CardText>{description}</CardText>
