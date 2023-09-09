@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
   Button,
@@ -11,7 +11,14 @@ import {
 import { CommentIcon, HeartIcon } from '../assets/IconsSVG'
 
 const PostCard = props => {
-  const { date, likes, author, description, image, comments } = props
+  const { date, author, likes, description, image, comments, handleOnLike } = props
+  const [numberOfLikes, setNumberOfLikes] = useState(likes)
+
+  const handleLike = () => {
+    handleOnLike()
+    setNumberOfLikes(likes + 1)
+  }
+
   return (
       <Card className='shadow-sm'>
         <CardImg
@@ -32,12 +39,12 @@ const PostCard = props => {
                   </div>
                   <span className="text-muted">Comments ({comments})</span>
               </div>
-              <Button color="danger" className="btn-icon btn-2">
+              <Button color="danger" className="btn-icon btn-2" onClick={handleLike}>
                   <div className="d-flex align-items-center">
                     <div className='me-2'>
                       <HeartIcon />
                     </div>
-                      <span className="btn-inner--text">{likes}</span>
+                      <span className="btn-inner--text">{numberOfLikes}</span>
                   </div>
               </Button>
           </div>

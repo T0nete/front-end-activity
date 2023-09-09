@@ -1,45 +1,23 @@
 import React from 'react'
 import {
-  Collapse,
   Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink
+  NavbarBrand
 } from 'reactstrap'
 import { BeamIcon, UserProfileIcon } from '../assets/IconsSVG'
+import { Views } from '../constants'
 
 const HeaderNavbar = props => {
-//   const [isOpen, setIsOpen] = useState(false)
+  const { handleSection } = props
 
-  //   const toggleNavbar = () => {} // setIsOpen(!isOpen)
-
-  const isOpen = true
   return (
     <Navbar color="faded" light expand="md" className='bg-light  justify-content-between align-items-center w-100 border-bottom shadow-sm'>
-
-        <NavbarBrand href="/" className="me-auto d-flex align-items-center">
+        <NavbarBrand onClick={() => { handleSection(Views.postList.name) }} href="/" className="me-auto d-flex align-items-center">
             <BeamIcon />
             <p className='mb-0'>three pics</p>
         </NavbarBrand>
-        <NavbarToggler onClick={() => {}} className="me-2 border-0">
-            <UserProfileIcon />
-        </NavbarToggler>
-        <Collapse isOpen={isOpen} navbar className='w-100 justify-content-end'>
-            <Nav className={`${isOpen ? 'flex-column' : 'justify-content-between flex-md-row'}`} navbar>
-                <NavItem className='mt-1'>
-                    <NavLink className='rounded bg-dark ' href="/postList">
-                        <p className='px-2 mb-0 text-white'>Post List</p>
-                    </NavLink>
-                </NavItem>
-                <NavItem className='mt-1'>
-                    <NavLink className='' href="/profile">
-                        <p className='px-2 mb-0'>Profile</p>
-                    </NavLink>
-                </NavItem>
-            </Nav>
-        </Collapse>
+        <div onClick={() => { handleSection(Views.profile.name) }}>
+          <UserProfileIcon />
+        </div>
     </Navbar>
   )
 }
