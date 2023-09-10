@@ -18,7 +18,6 @@ const MainContentLayout = props => {
     () =>
       debounce((event) => {
         const searchValue = event.target.value
-        console.log(searchValue)
         const filteredPost = posts.filter((post) => {
           return post.description.toLowerCase().includes(searchValue.toLowerCase())
         })

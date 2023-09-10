@@ -25,36 +25,36 @@ const PostCard = props => {
   }
 
   return (
-      <Card className='shadow-sm'>
+    <Card className='shadow-sm'>
         <CardImg
           alt="Post image"
           src={image}
           top
         />
-        <CardBody>
+        <CardBody className='flex-grow-1'>
           <CardText>
             <small className="text-muted">{date}</small>
           </CardText>
           <CardTitle><b>@{author}</b></CardTitle>
           <CardText>{description}</CardText>
-          <div className="d-flex justify-content-between align-items-center">
-              <div className="d-flex align-items-center">
-                  <div className='me-2'>
-                      <CommentIcon />
-                  </div>
-                  <span className="text-muted">Comments ({comments})</span>
-              </div>
-              <Button color="danger" className="btn-icon btn-2" onClick={handleLike}>
-                  <div className="d-flex align-items-center">
-                    <div className='me-2'>
-                      <HeartIcon />
-                    </div>
-                      <span className="btn-inner--text">{numberOfLikes}</span>
-                  </div>
-              </Button>
-          </div>
         </CardBody>
-      </Card>
+        <div className="d-flex justify-content-between align-items-center p-3">
+          <div className="d-flex align-items-center">
+              <div className='me-2'>
+                  <CommentIcon />
+              </div>
+              <span className="text-muted">Comments ({comments})</span>
+          </div>
+          <Button color="danger" className="btn-icon btn-2" onClick={handleLike}>
+              <div className="d-flex align-items-center">
+                <div className='me-2'>
+                  <HeartIcon />
+                </div>
+                  <span className="btn-inner--text">{numberOfLikes}</span>
+              </div>
+          </Button>
+        </div>
+    </Card>
   )
 }
 
