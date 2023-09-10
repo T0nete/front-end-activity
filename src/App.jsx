@@ -14,11 +14,12 @@ function App () {
       axiosInstance.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`
       setSection(Views.postList.name)
     } else {
-      setSection(Views.profile.name)
+      setSection(Views.login.name)
     }
   }, [])
 
   const handleSection = (section) => {
+    console.log(section)
     setSection(section)
   }
 
@@ -29,7 +30,7 @@ function App () {
   return (
     <div className="App">
       {
-        section === Views.profile.name
+        section === Views.login.name
           ? <Login onLoginComplete={onLoginComplete}/>
           : (
             <div>
