@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Button, Col, Form, FormGroup, Label, Input, Card, CardTitle, CardBody, Alert } from 'reactstrap'
-import '../styles/styles.css'
 import axiosInstance from '../service/axiosService'
+import { useNavigate } from 'react-router-dom'
+
+import '../styles/styles.css'
 
 const Login = (props) => {
-  const { onLoginComplete } = props
   const [error, setError] = useState('')
-
+  const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault()
     const { username, password } = e.target.elements
@@ -20,9 +21,9 @@ const Login = (props) => {
           username: username.value,
           password: password.value
         })
-        axiosInstance.defaults.headers.common.Authorization = `Bearer ${response.data.token}`
         localStorage.setItem('token', response.data.token)
-        onLoginComplete()
+
+        navigate('/postList')
       } catch (error) {
         setError(error.response.data.message)
       }

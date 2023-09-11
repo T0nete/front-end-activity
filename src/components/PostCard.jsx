@@ -10,6 +10,7 @@ import {
 } from 'reactstrap'
 import { CommentIcon, HeartIcon } from '../assets/IconsSVG'
 import axiosInstance from '../service/axiosService'
+import { getToken } from '../utils/utils'
 
 const PostCard = props => {
   const { id, date, author, likes, description, image, comments } = props
@@ -17,7 +18,7 @@ const PostCard = props => {
 
   const handleLike = async () => {
     try {
-      await axiosInstance.post(`/posts/${id}/like`)
+      await axiosInstance.post(`/posts/${id}/like`, {}, { headers: { Authorization: getToken() } })
       setNumberOfLikes(likes + 1)
     } catch (error) {
       console.log(error)

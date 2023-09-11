@@ -4,19 +4,21 @@ import {
   NavbarBrand
 } from 'reactstrap'
 import { BeamIcon, UserProfileIcon } from '../assets/IconsSVG'
-import { Views } from '../constants'
+import { Link } from 'react-router-dom'
 
 const HeaderNavbar = props => {
-  const { handleSection } = props
-
   return (
     <Navbar color="faded" light expand="md" className='bg-light  justify-content-between align-items-center w-100 border-bottom shadow-sm'>
-        <NavbarBrand onClick={() => { handleSection(Views.postList.name) }} href="/" className="me-auto d-flex align-items-center">
-            <BeamIcon />
-            <p className='mb-0'>three pics</p>
-        </NavbarBrand>
-        <div onClick={() => { handleSection(Views.profile.name) }}>
-          <UserProfileIcon />
+        <Link to='/postList'>
+          <NavbarBrand tag="div" className="me-auto d-flex align-items-center">
+              <BeamIcon />
+              <p className='mb-0'>three pics</p>
+          </NavbarBrand>
+        </Link>
+        <div >
+          <Link to='/profile'>
+            <UserProfileIcon />
+          </Link>
         </div>
     </Navbar>
   )

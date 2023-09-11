@@ -5,3 +5,7 @@ export const formatDate = (date) => {
   const year = dateObj.getFullYear()
   return `${month} ${day}, ${year}`
 }
+
+export const getToken = () => {
+  return `Bearer ${localStorage.getItem('token')}`
+}
