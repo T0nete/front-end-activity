@@ -12,6 +12,7 @@ const MainContentLayout = props => {
   const { section, handleSection } = props
   const [isLoading, setIsLoading] = useState(false)
   const [posts, setPosts] = useState([])
+  const [filteredPosts, setFilteredPosts] = useState([])
   const [user, setUser] = useState({})
 
   const handleSearchValue = useMemo(
@@ -21,7 +22,7 @@ const MainContentLayout = props => {
         const filteredPost = posts.filter((post) => {
           return post.description.toLowerCase().includes(searchValue.toLowerCase())
         })
-        setPosts(filteredPost)
+        setFilteredPosts(filteredPost)
       }, 500),
     []
   )
@@ -43,6 +44,7 @@ const MainContentLayout = props => {
           }
         })
         setPosts(postList)
+        setFilteredPosts(postList)
       } catch (error) {
 
       } finally {
@@ -75,7 +77,7 @@ const MainContentLayout = props => {
     <>
     <header className="App-header">
         <HeaderNavbar handleSection={handleSection}/>
-        </header>
+    </header>
     <div className="container">
 
     <div className="p-2">
@@ -93,7 +95,7 @@ const MainContentLayout = props => {
                       ? <div className="text-center">Loading...</div>
                       : (
                           <div className='p-2'>
-                            <PostList posts={posts} setPosts={setPosts}/>
+                            <PostList posts={filteredPosts} setPosts={setPosts}/>
                           </div>
                         )
                   }
