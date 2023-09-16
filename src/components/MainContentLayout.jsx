@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react'
 import debounce from 'lodash.debounce'
 import SearchBar from './SearchBar'
 import PostList from './PostList'
-import { mockUser } from '../mock/mockPost'
 import { Views } from '../constants'
 import Profile from './Profile'
 import HeaderNavbar from './Navbar'
@@ -13,6 +12,7 @@ const MainContentLayout = props => {
   const { section, handleSection } = props
   const [isLoading, setIsLoading] = useState(false)
   const [posts, setPosts] = useState([])
+  const [user, setUser] = useState({})
 
   const handleSearchValue = useMemo(
     () =>
@@ -49,8 +49,25 @@ const MainContentLayout = props => {
         setIsLoading(false)
       }
     }
+
+    const fetchUser = async () => {
+      try {
+        setIsLoading(true)
+        const userResponse = await axiosInstance.get('/users/me')
+        const user = userResponse.data
+        console.log(user)
+        setUser(user)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
     if (section === Views.postList.name) {
       fetchPost()
+    } else if (section === Views.profile.name) {
+      fetchUser()
     }
   }, [section])
 
@@ -64,7 +81,7 @@ const MainContentLayout = props => {
     <div className="p-2">
         {
           section === Views.profile.name
-            ? <Profile avatar={mockUser.avatar} username={mockUser.username} bio={mockUser.bio}/>
+            ? <Profile avatar={user.avatar} username={user.username} bio={user.bio}/>
             : <div>
               <div className="row justify-content-center">
                   <div className="col-md-6">

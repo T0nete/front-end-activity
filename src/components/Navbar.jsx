@@ -5,6 +5,7 @@ import {
 } from 'reactstrap'
 import { BeamIcon, UserProfileIcon } from '../assets/IconsSVG'
 import { Views } from '../constants'
+import '../styles/styles.css'
 
 const HeaderNavbar = props => {
   const { handleSection } = props
@@ -15,7 +16,7 @@ const HeaderNavbar = props => {
             <BeamIcon />
             <p className='mb-0'>three pics</p>
         </NavbarBrand>
-        <div onClick={() => { handleSection(Views.profile.name) }}>
+        <div onClick={() => { handleSection(Views.profile.name) }} className='cursor-pointer'>
           <UserProfileIcon />
         </div>
     </Navbar>
