@@ -11,28 +11,28 @@ import { getToken } from './utils/utils'
 import axiosInstance from './service/axiosService'
 function App () {
   const [currentUser, setCurrentUser] = useState(null)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userResposne = await axiosInstance.get('/users/me',
+        const userResponse = await axiosInstance.get('/users/me',
           { headers: { Authorization: getToken() } }
         )
-        const user = userResposne.data
+        const user = userResponse.data
         setCurrentUser(user)
       } catch (error) {
-        console.error(error)
+        console.log(error)
       }
     }
     const token = getToken()
     if (token) {
       fetchUser()
-      // setCurrentUser(mockUser)
     } else {
       // Clear user from state if token is invalid or expired
       setCurrentUser(null)
     }
-  }, [])
+  }, [isAuthenticated])
 
   return (
     <div className="App">
@@ -43,7 +43,7 @@ function App () {
             <Route path='/postList' element={<MainContentLayout><PostList /> </MainContentLayout>} />
             <Route path='/profile' element={<MainContentLayout><Profile {...currentUser} /> </MainContentLayout>} />
           </Route>
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
         </Routes>
       </Router>
     </div>

@@ -7,5 +7,6 @@ export const formatDate = (date) => {
 }
 
 export const getToken = () => {
+  if (!localStorage.getItem('token')) return null
   return `Bearer ${localStorage.getItem('token')}`
 }

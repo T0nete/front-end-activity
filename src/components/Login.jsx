@@ -22,7 +22,7 @@ const Login = (props) => {
           password: password.value
         })
         localStorage.setItem('token', response.data.token)
-
+        props.setIsAuthenticated(true)
         navigate('/postList')
       } catch (error) {
         setError(error.response.data.message)
